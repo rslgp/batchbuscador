@@ -71,5 +71,5 @@ if (!fs.existsSync(dir)){
     if (--i) {          // If i > 0, keep going
       theLoop(i);       // Call the loop again, and pass it the current value of i
     }
-  }, 6000 + (Math.floor(Math.random() * 813)) );
+  }, 6000 + (Math.floor(Math.random() * 2200)) );
 })(sites.length);
