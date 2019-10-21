@@ -30,6 +30,9 @@ if (!fs.existsSync(dir)){
 	options.url = sites[index++];
     request(options, function (error, response, body) {
 		try{
+			if (error) {
+			  throw false;
+			}
 			houveResultado = body.indexOf("No results found") == -1;
 		}catch(e){
 			houveResultado=false;
