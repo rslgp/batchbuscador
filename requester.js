@@ -33,7 +33,7 @@ if (!fs.existsSync(dir)){
 	options.url = sites[index++];
 	  
 	  //catch me if you can
-	switch(Math.floor(Math.random() * 3)){
+	switch(Math.floor(Math.random() * 4)){
 		 //android
 		case 0:
 		options.headers['user-agent'] = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Mobile Safari/537.36";
