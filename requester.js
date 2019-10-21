@@ -49,7 +49,7 @@ if (!fs.existsSync(dir)){
 			
 			//encontrou resultado util pra cruzamento de dados
 			special="";
-			if(body.indexOf("cnpj.biz")){
+			if(body.indexOf("cnpj.biz") != -1){
 				houveResultado = true;
 				special="-special"
 			}
