@@ -40,6 +40,11 @@ if (!fs.existsSync(dir)){
 			}
 			
 			houveResultado = body.indexOf("No results found") == -1;
+			
+			//encontrou resultado util pra cruzamento de dados
+			if(body.indexOf("cnpj.biz")){
+				houveResultado = true;
+			}
 		}catch(e){
 			houveResultado=false;
 		}
