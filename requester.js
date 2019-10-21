@@ -29,16 +29,20 @@ if (!fs.existsSync(dir)){
   setTimeout(function () {
 	options.url = sites[index++];
     request(options, function (error, response, body) {
-	  houveResultado = body.indexOf("No results found") == -1;
-	  if(houveResultado){
+		try{
+			houveResultado = body.indexOf("No results found") == -1;
+		}catch(e){
+			houveResultado=false;
+		}
+		if(houveResultado){
 		  var stream = fs.createWriteStream(dir+"/"+(index-1)+".html");
 			stream.once('open', function(fd) {
 			  stream.write(body);
 			  stream.end();
 			});
-	  }else{
+		}else{
 		  console.log("nao houve resultado");
-	  }
+		}
 	});
 	
     if (--i) {          // If i > 0, keep going
