@@ -29,10 +29,16 @@ if (!fs.existsSync(dir)){
   setTimeout(function () {
 	options.url = sites[index++];
     request(options, function (error, response, body) {
+	    
+		if(!error && body.indexOf("Our systems have detected unusual traffic") != -1){ //detected
+			throw false; //stop
+		}
+	    
 		try{
 			if (error) {
 			  throw false;
 			}
+			
 			houveResultado = body.indexOf("No results found") == -1;
 		}catch(e){
 			houveResultado=false;
