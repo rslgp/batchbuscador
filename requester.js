@@ -31,12 +31,13 @@ if (!fs.existsSync(dir)){
 	options.url = sites[index++];
     request(options, function (error, response, body) {
 	    
-		if(!error && body.length < 20 && body.indexOf("Our systems have detected unusual traffic") != -1){ //detected
+		if(body.indexOf("Our systems have detected unusual traffic") != -1){ //detected
 			var stream = fs.createWriteStream(dir+"/DETECTADO.html");
 				stream.once('open', function(fd) {
 				  stream.write(body);
 				  stream.end();
 				});
+			console.log("DETECTADO, abra no chrome: "+sites[index-1]);
 			throw false; //stop
 		}
 	    
