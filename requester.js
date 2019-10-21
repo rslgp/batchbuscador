@@ -20,6 +20,7 @@ var sites = ['https://www.google.com/search?q="transporte"+-site%3Acttu.recife.p
 
 var index = 0;
 var houveResultado;
+var special="";
 
 if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
@@ -42,14 +43,16 @@ if (!fs.existsSync(dir)){
 			houveResultado = body.indexOf("No results found") == -1;
 			
 			//encontrou resultado util pra cruzamento de dados
+			special="";
 			if(body.indexOf("cnpj.biz")){
 				houveResultado = true;
+				special="-special"
 			}
 		}catch(e){
 			houveResultado=false;
 		}
 		if(houveResultado){
-		  var stream = fs.createWriteStream(dir+"/"+(index-1)+".html");
+		  var stream = fs.createWriteStream(dir+"/"+(index-1)+special+".html");
 			stream.once('open', function(fd) {
 			  stream.write(body);
 			  stream.end();
