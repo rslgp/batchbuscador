@@ -5,14 +5,16 @@ var dir = './resultados';
 var options = {
   url: 'https://www.google.com/search?q="transporte"+-site%3Acttu.recife.pe.gov.br+"recife"+AND+"JOCEMAR+CEZAR+CA,PELO+DE+SOUZA"',
   headers: {
-	'authority': 'www.google.com',
-	'cache-control': 'max-age=0',
+	'authority': 'www.google.com.br',
+	'pragma': 'no-cache',
+	'cache-control': 'no-cache',
 	'upgrade-insecure-requests': '1',
     'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36',
-	'sec-fetch-mode': 'navigate',
-	'sec-fetch-user': '?1',
+	'Sec-Fetch-Mode': 'navigate',
+	'Sec-Fetch-User': '?1',
 	'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
 	'sec-fetch-site': 'none',
+	'referer': 'https://www.google.com.br/',
 	'accept-language': 'en-US,en;q=0.9,pt;q=0.8'
   }
 };
@@ -29,6 +31,26 @@ if (!fs.existsSync(dir)){
 (function theLoop (i) {
   setTimeout(function () {
 	options.url = sites[index++];
+	  
+	  //catch me if you can
+	switch(Math.floor(Math.random() * 3)){
+		case 0: //android
+		options.user-agent = "Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Mobile Safari/537.36";
+		break;
+		
+		case 2: //iphone
+		options.user-agent = "Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 Mobile/14E304 Safari/602.1"
+		break;
+		
+		case 1: //ipad
+		options.user-agent = "Mozilla/5.0 (iPad; CPU OS 11_0 like Mac OS X) AppleWebKit/604.1.34 (KHTML, like Gecko) Version/11.0 Mobile/15A5341f Safari/604.1";
+		break;
+		
+		default: //pc
+		options.user-agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+		break;
+	}
+	  
     request(options, function (error, response, body) {
 	    
 		if(body.indexOf("Our systems have detected unusual traffic") != -1){ //detected
