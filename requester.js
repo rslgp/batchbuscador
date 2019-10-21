@@ -60,7 +60,7 @@ if (!fs.existsSync(dir)){
 	  
     request(options, function (error, response, body) {
 	    
-		if(body.indexOf("Our systems have detected unusual traffic") != -1){ //detected
+		if(body!=undefined && body.indexOf("Our systems have detected unusual traffic") != -1){ //detected
 			var stream = fs.createWriteStream(dir+"/DETECTADO.html");
 				stream.once('open', function(fd) {
 				  stream.write(body);
@@ -75,7 +75,8 @@ if (!fs.existsSync(dir)){
 			  throw false;
 			}
 			
-			houveResultado = body.indexOf("No results found") == -1;
+			if(body!=undefined) houveResultado = body.indexOf("No results found") == -1;
+			else throw false;
 			
 			//encontrou resultado util pra cruzamento de dados
 			special="";
